@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="PlaData — simple ecological tracking, research and AI-ready insights." />
+  <title>PlaData — Ecological Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <style>
+    :root{--bg:#f5f7f4;--surface:#fff;--surface2:#eef4ed;--ink:#17221b;--muted:#68746c;--line:#dfe7e0;--green:#25613f;--green2:#3b8058;--blue:#346c82;--amber:#a66e1d;--red:#a64c43;--shadow:0 12px 28px rgba(26,46,31,.07);--radius:18px}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
+    .app{display:flex;min-height:100vh}.sidebar{width:230px;background:#11291c;color:#eef6ef;padding:18px 14px;position:sticky;top:0;height:100vh}.brand{display:flex;align-items:center;gap:10px;padding:7px 10px 22px}.brand-mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#93c675,#2f7450);display:grid;place-items:center;font-weight:800;color:#fff}.brand h1{font-family:'Space Grotesk';font-size:22px;margin:0}.brand span{font-size:10px;color:#a9bcae}.nav{display:flex;flex-direction:column;gap:5px}.nav button{border:0;background:transparent;color:#bccbbf;padding:11px 12px;border-radius:11px;display:flex;gap:10px;align-items:center;text-align:left;font-weight:700}.nav button:hover,.nav button.active{background:#1a3a27;color:#fff}.nav .emoji{width:18px;text-align:center}.side-card{margin-top:20px;background:#173524;border:1px solid #2a4736;border-radius:14px;padding:12px;font-size:11px;line-height:1.45;color:#bdcbbf}.main{flex:1;min-width:0}.topbar{position:sticky;top:0;z-index:15;height:68px;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 26px}.crumb{font-size:13px;color:var(--muted)}.top-actions{display:flex;gap:8px;align-items:center}.content{max-width:1440px;margin:0 auto;padding:24px}.view{display:none}.view.active{display:block}.hero{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:18px}.hero h2{font-family:'Space Grotesk';font-size:30px;line-height:1.05;margin:0 0 8px}.hero p{margin:0;color:var(--muted);max-width:760px}.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 13px;border-radius:11px;font-weight:800}.btn:hover{filter:brightness(.985)}.btn.primary{background:var(--green);border-color:var(--green);color:#fff}.btn.danger{color:var(--red);border-color:#e9c9c5;background:#fff8f7}.btn.small{padding:7px 10px;font-size:12px}.cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.card,.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.stat{padding:15px;min-height:122px}.stat .label{font-size:11px;font-weight:800;color:var(--muted)}.stat .value{font-family:'Space Grotesk';font-size:25px;margin-top:9px;font-weight:700}.stat .meta{font-size:10px;color:var(--muted);margin-top:5px}.grid{display:grid;gap:14px;margin-top:14px}.grid.two{grid-template-columns:1.35fr 1fr}.grid.equal{grid-template-columns:1fr 1fr}.panel{padding:18px}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}.panel-title{font-family:'Space Grotesk';font-size:18px;font-weight:700}.panel-sub{font-size:11px;color:var(--muted);margin-top:4px}.chart-wrap{height:300px}.mini-list{display:flex;flex-direction:column;gap:9px}.mini{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #edf1ed;padding:10px 0}.mini:last-child{border-bottom:0}.pill{display:inline-flex;align-items:center;border-radius:999px;padding:5px 8px;background:var(--surface2);color:var(--green);font-size:10px;font-weight:800}.muted{color:var(--muted)}.tiny{font-size:10px}.search{display:flex;gap:8px;align-items:center;margin:12px 0}.input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px 12px;outline:none}.input:focus,select:focus,textarea:focus{border-color:#b5cab8;box-shadow:0 0 0 3px #e8f0e8}.ecosystem-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.eco-card{padding:16px}.eco-card h3{margin:0;font-family:'Space Grotesk';font-size:18px}.eco-top{display:flex;justify-content:space-between;gap:10px}.eco-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.eco-stat{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fbfdfb}.eco-stat small{display:block;color:var(--muted);font-size:9px}.eco-stat strong{display:block;margin-top:3px;font-size:13px}.ecosystem-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}.ecosystem-card.selected{border-color:#9fb7a5;box-shadow:0 0 0 2px #e7efe8}.eco-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric-box{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdfb}.metric-box small{color:var(--muted);font-size:9px}.metric-box strong{display:block;margin-top:5px;font-family:'Space Grotesk';font-size:17px}.callout{padding:13px;border:1px solid #dbe8dc;background:#f6fbf6;border-radius:13px;font-size:12px;line-height:1.5}.empty{padding:28px;border:1px dashed #cbd7cc;border-radius:13px;color:var(--muted);text-align:center}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #eef2ee;white-space:nowrap}th{color:var(--muted);font-size:10px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form-group{display:flex;flex-direction:column;gap:6px}.form-group.full{grid-column:1/-1}.form-group label{font-size:10px;font-weight:800;color:var(--muted)}.modal{position:fixed;inset:0;background:rgba(10,25,16,.42);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal.open{display:flex}.modal-card{width:min(620px,100%);background:#fff;border-radius:20px;box-shadow:0 24px 80px rgba(0,0,0,.22);padding:20px;max-height:92vh;overflow:auto}.modal-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}.modal-head h3{font-family:'Space Grotesk';margin:0;font-size:21px}.close{border:0;background:#f1f4f1;border-radius:10px;width:36px;height:36px}.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.field-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.notice{padding:10px 12px;border-radius:10px;background:#f7f9f7;border:1px solid var(--line);font-size:11px;color:var(--muted);line-height:1.45}.toast{position:fixed;right:18px;bottom:18px;background:#173523;color:white;padding:11px 13px;border-radius:11px;box-shadow:0 12px 30px rgba(0,0,0,.18);font-size:12px;font-weight:700;opacity:0;transform:translateY(10px);pointer-events:none;transition:.2s;z-index:70}.toast.show{opacity:1;transform:translateY(0)}.tag-row{display:flex;gap:6px;flex-wrap:wrap}.source-dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:5px;background:var(--green2)}
+    @media(max-width:1100px){.cards{grid-template-columns:repeat(3,1fr)}.ecosystem-list{grid-template-columns:1fr 1fr}.grid.two,.grid.equal{grid-template-columns:1fr 1fr}}
+    @media(max-width:860px){.sidebar{width:76px}.brand h1,.brand span,.nav button span:not(.emoji),.side-card{display:none}.brand{justify-content:center}.nav button{justify-content:center}.hero{flex-direction:column}.grid.two,.grid.equal,.form-grid{grid-template-columns:1fr}.ecosystem-list{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}}
+    @media(max-width:580px){.sidebar{display:none}.content{padding:16px}.topbar{padding:0 16px}.top-actions .btn:not(.primary){display:none}.cards{grid-template-columns:1fr}.metric-grid{grid-template-columns:1fr 1fr}.field-row{grid-template-columns:1fr}.hero h2{font-size:26px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">P</div><div><h1>PlaData</h1><span>Ecological intelligence</span></div></div>
+    <nav class="nav">
+      <button class="active" data-view="dashboard"><span class="emoji">⌂</span><span>Home</span></button>
+      <button data-view="scan"><span class="emoji">📷</span><span>Scan</span></button>
+      <button data-view="ecosystems"><span class="emoji">🌱</span><span>My Ecosystems</span></button>
+      <button data-view="explore"><span class="emoji">🌍</span><span>Explore</span></button>
+      <button data-view="research"><span class="emoji">📚</span><span>Research</span></button>
+      <button data-view="insights"><span class="emoji">✦</span><span>Insights</span></button>
+    </nav>
+    <div class="side-card"><strong>Simple by design</strong><br>Start with one ecosystem, add measurements, then compare your data with research and global ecosystem profiles.</div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div class="crumb" id="crumb">Home / Overview</div>
+      <div class="top-actions">
+        <button class="btn" id="refreshWeather">↻ Refresh weather</button>
+        <button class="btn primary" id="quickAdd">+ Add data</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <section class="view active" id="view-dashboard">
+        <div class="hero">
+          <div><h2 id="homeTitle">Your ecosystem at a glance.</h2><p id="homeSubtitle">Choose an ecosystem to see its latest environmental conditions, trends and notes.</p></div>
+          <div><span class="pill" id="weatherChip">Weather: loading…</span></div>
+        </div>
+        <div id="noEcoHome" class="empty" style="display:none">You have no ecosystems yet. Create one to start tracking data.</div>
+        <div id="homeBody">
+          <div class="cards" id="dashboardStats"></div>
+          <div class="grid two">
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">Trend</div><div class="panel-sub">Recorded measurements for the current ecosystem</div></div><select id="dashboardMetric" style="max-width:180px"><option value="soilMoisture">Soil moisture</option><option value="soilTemp">Soil temperature</option><option value="temperature">Air temperature</option><option value="humidity">Humidity</option><option value="pH">Soil pH</option><option value="plantGrowth">Plant growth</option></select></div><div class="chart-wrap"><canvas id="trendChart"></canvas></div></div>
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">Quick notes</div><div class="panel-sub">Simple observations based on your saved data</div></div></div><div id="fieldNotes"></div></div>
+          </div>
+          <div class="grid equal">
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">Latest data</div><div class="panel-sub">Most recent measurements</div></div><button class="btn small" id="openAddData">Add measurement</button></div><div id="latestTable"></div></div>
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">Current ecosystem</div><div class="panel-sub">Quick controls</div></div></div><div id="currentEcoCard"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-scan">
+        <div class="hero">
+          <div><h2>Scan flora or fauna.</h2><p>Use your camera or upload a photo. PlaData can identify plants with Pl@ntNet or use the optional PlaData AI server for broader flora and fauna identification.</p></div>
+          <button class="btn primary" id="startCameraBtn">Start camera</button>
+        </div>
+        <div class="grid equal">
+          <div class="panel">
+            <div class="panel-head"><div><div class="panel-title">Camera</div><div class="panel-sub">Take a clear photo of one organism.</div></div><span class="pill" id="cameraStatus">Off</span></div>
+            <div style="background:#12241a;border-radius:16px;overflow:hidden;aspect-ratio:4/3;display:grid;place-items:center;position:relative">
+              <video id="cameraVideo" autoplay playsinline muted style="width:100%;height:100%;object-fit:cover;display:none"></video>
+              <canvas id="cameraCanvas" style="display:none"></canvas>
+              <div id="cameraPlaceholder" style="color:#c4d0c7;text-align:center;padding:30px"><div style="font-size:34px">📷</div><div style="font-weight:800;margin-top:8px">Camera is off</div><div style="font-size:12px;opacity:.8;margin-top:4px">Start the camera or upload an image.</div></div>
+            </div>
+            <div class="field-row" style="margin-top:12px"><button class="btn" id="captureScanBtn" disabled>Capture photo</button><label class="btn" style="text-align:center;display:block">Upload photo<input id="scanFileInput" type="file" accept="image/*" capture="environment" style="display:none"></label></div>
+            <div class="field-row" style="margin-top:8px"><select id="scanMode"><option value="auto">Automatic</option><option value="plant">Plant / flora</option><option value="animal">Animal / fauna</option></select><select id="plantNetProject"><option value="all">PlantNet: all flora</option><option value="k-world-flora">PlantNet: world flora</option></select></div>
+            <div class="notice" style="margin-top:10px">Plant identification uses the separate Pl@ntNet service. Add your key below and authorize the website domain in Pl@ntNet. Animal identification is not sent to a fake local model.</div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><div class="panel-title">Identification</div><div class="panel-sub">Your result appears here after a scan.</div></div><span class="pill" id="scanEngineStatus">Waiting</span></div>
+            <div id="scanPreviewWrap" style="display:none;margin-bottom:12px"><img id="scanPreview" alt="Captured organism" style="width:100%;max-height:260px;object-fit:contain;border-radius:14px;background:#f3f6f3"></div>
+            <div id="scanResult" class="empty">Take or upload a photo to begin.</div>
+            <div id="scanActions" class="form-actions" style="display:none"><button class="btn" id="scanAddObservationBtn">Add to current ecosystem</button><button class="btn" id="scanRescanBtn">Scan another</button></div>
+          </div>
+        </div>
+        <div class="grid two">
+          <div class="panel"><div class="panel-head"><div><div class="panel-title">Saved observations</div><div class="panel-sub">Species you have added to your active ecosystem.</div></div><button class="btn small" id="goCurrentEcoFromScan">Open ecosystem</button></div><div id="observationList"></div></div>
+          <div class="panel"><div class="panel-head"><div><div class="panel-title">Scanner setup</div><div class="panel-sub">API keys stay in your browser session.</div></div></div>
+            <div class="form-group"><label>PLANTNET API KEY</label><input class="input" id="plantNetKey" type="password" placeholder="Paste your Pl@ntNet key"></div>
+            <div class="notice" style="margin-top:10px">Pl@ntNet's browser mode requires the API key to be explicitly exposed and your site domain to be authorized in your Pl@ntNet settings. API keys are not saved by PlaData.</div>
+            <div class="callout" style="margin-top:10px"><strong>No Node.js required</strong><br>This version is a static website. The camera runs in the browser, and plant identification connects directly to Pl@ntNet when your API key and authorized domain are configured.</div>
+          </div>
+        </div>
+      </section>
+      <section class="view" id="view-ecosystems">
+        <div class="hero"><div><h2>My ecosystems</h2><p>Create a garden, school plot, forest site or any custom ecosystem. Each one keeps its own data.</p></div><button class="btn primary" id="addEcosystemBtn">+ Add ecosystem</button></div>
+        <div class="search"><input class="input" id="ecoSearch" placeholder="Search your ecosystems…"></div>
+        <div id="myEcoGrid" class="ecosystem-list"></div>
+      </section>
+
+      <section class="view" id="view-explore">
+        <div class="hero"><div><h2>Explore ecosystems</h2><p>Reference profiles help you understand how different forests and ecosystems differ.</p></div></div>
+        <div class="search"><input class="input" id="globalSearch" placeholder="Search forests, regions or species…"></div>
+        <div class="ecosystem-list" id="globalEcoGrid"></div>
+      </section>
+
+      <section class="view" id="view-research">
+        <div class="hero"><div><h2>Research</h2><p>Save scientific article notes and extract ecological themes. The built-in analyzer is a transparent demo until you connect a real AI model.</p></div><button class="btn primary" id="openArticleBtn">+ Add article</button></div>
+        <div class="grid equal"><div class="panel"><div class="panel-title">Saved research</div><div class="panel-sub">Your article library</div><div id="articleList" style="margin-top:12px"></div></div><div class="panel"><div class="panel-title">How research connects</div><div class="panel-sub">PlaData looks for matching themes between your data and article notes.</div><div id="researchHelp" style="margin-top:12px"></div></div></div>
+      </section>
+
+      <section class="view" id="view-insights">
+        <div class="hero"><div><h2>Insights</h2><p>Use your measurements, weather context and saved research to spot useful next steps.</p></div></div>
+        <div class="grid equal"><div class="panel"><div class="panel-title">Improve this ecosystem</div><div class="panel-sub">Recommendations are based only on the data you have saved.</div><div id="recommendations" style="margin-top:12px"></div></div><div class="panel"><div class="panel-title">Data confidence</div><div class="panel-sub">More regular measurements make trends more useful.</div><div id="confidencePanel" style="margin-top:12px"></div></div></div>
+        <div class="panel" style="margin-top:14px"><div class="panel-title">Research connections</div><div class="panel-sub">Relevant themes found in your saved article library</div><div id="researchConnections" style="margin-top:12px"></div></div>
+      </section>
+
+      <section class="view" id="view-ecosystem-detail">
+        <div class="hero"><div><h2 id="detailName">Ecosystem</h2><p id="detailMeta">—</p></div><div class="top-actions"><button class="btn" id="backToEcosystems">← Back</button><button class="btn" id="editEcoBtn">Edit</button><button class="btn danger" id="deleteEcoBtn">Delete</button></div></div>
+        <div class="panel"><div class="panel-head"><div><div class="panel-title">Overview</div><div class="panel-sub" id="detailNotes">—</div></div><span class="pill" id="detailType">—</span></div><div class="metric-grid" id="detailMetrics"></div></div>
+        <div class="grid two">
+          <div class="panel"><div class="panel-head"><div><div class="panel-title">Environmental data</div><div class="panel-sub">Add real measurements or capture current weather</div></div><button class="btn small" id="detailAddData">+ Measurement</button></div><div id="detailTable"></div></div>
+          <div class="panel"><div class="panel-head"><div><div class="panel-title">Location weather</div><div class="panel-sub">Current conditions where the ecosystem is located</div></div><span class="pill" id="detailWeatherStatus">—</span></div><div id="detailWeatherCards"></div><div class="field-row" style="margin-top:12px"><input class="input" id="detailLat" placeholder="Latitude"><input class="input" id="detailLon" placeholder="Longitude"></div><div class="form-actions"><button class="btn" id="useLocationBtn">Use my location</button><button class="btn primary" id="captureWeatherBtn">Capture current conditions</button></div></div>
+        </div>
+        <div class="panel" style="margin-top:14px"><div class="panel-head"><div><div class="panel-title">Trend</div><div class="panel-sub">Choose a variable to see its recorded history</div></div><select id="detailMetric" style="max-width:190px"><option value="soilMoisture">Soil moisture</option><option value="soilTemp">Soil temperature</option><option value="temperature">Air temperature</option><option value="humidity">Humidity</option><option value="pH">Soil pH</option><option value="plantGrowth">Plant growth</option></select></div><div class="chart-wrap"><canvas id="detailChart"></canvas></div></div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div class="modal" id="ecosystemModal"><div class="modal-card"><div class="modal-head"><h3 id="ecoModalTitle">Add ecosystem</h3><button class="close" data-close="ecosystemModal">×</button></div><form id="ecosystemForm"><input type="hidden" name="id"><div class="form-grid"><div class="form-group"><label>NAME</label><input class="input" name="name" required placeholder="e.g. Shaurya's Garden"></div><div class="form-group"><label>TYPE</label><select name="type"><option>Garden</option><option>Forest</option><option>Farm</option><option>School plot</option><option>Greenhouse</option><option>Wetland</option><option>Other</option></select></div><div class="form-group"><label>LOCATION</label><input class="input" name="location" placeholder="Dubai, UAE"></div><div class="form-group"><label>LATITUDE</label><input class="input" name="lat" type="number" step="0.0001" placeholder="25.2048"></div><div class="form-group"><label>LONGITUDE</label><input class="input" name="lon" type="number" step="0.0001" placeholder="55.2708"></div><div class="form-group"><label>ICON</label><select name="icon"><option>🌱</option><option>🌳</option><option>🌿</option><option>🌾</option><option>🌵</option><option>💧</option><option>🪴</option></select></div><div class="form-group full"><label>NOTES</label><textarea class="input" name="notes" rows="3" placeholder="What are you tracking here?"></textarea></div></div><div class="notice" style="margin-top:12px">Each ecosystem has its own measurements and settings. Deleting one does not delete your other ecosystems.</div><div class="form-actions"><button type="button" class="btn" data-close="ecosystemModal">Cancel</button><button class="btn primary" type="submit">Save ecosystem</button></div></form></div></div>
+
+<div class="modal" id="dataModal"><div class="modal-card"><div class="modal-head"><h3>Add measurement</h3><button class="close" data-close="dataModal">×</button></div><form id="dataForm"><div class="form-grid"><div class="form-group"><label>VARIABLE</label><select name="variable"><option value="soilMoisture">Soil moisture</option><option value="soilTemp">Soil temperature</option><option value="temperature">Air temperature</option><option value="humidity">Humidity</option><option value="pH">Soil pH</option><option value="nitrogen">Nitrogen</option><option value="phosphorus">Phosphorus</option><option value="potassium">Potassium</option><option value="plantGrowth">Plant growth</option><option value="rainfall">Rainfall</option><option value="sunlight">Sunlight</option></select></div><div class="form-group"><label>VALUE</label><input class="input" name="value" type="number" step="0.01" required></div><div class="form-group"><label>UNIT</label><input class="input" name="unit" value="%" required></div><div class="form-group"><label>DATE & TIME</label><input class="input" name="timestamp" type="datetime-local" required></div><div class="form-group"><label>SOURCE</label><select name="source"><option>User Input</option><option>Live API</option><option>Scientific Source</option><option>Demo Data</option></select></div><div class="form-group full"><label>NOTES</label><textarea class="input" name="notes" rows="2" placeholder="Optional observation"></textarea></div></div><div class="form-actions"><button type="button" class="btn" data-close="dataModal">Cancel</button><button class="btn primary" type="submit">Save measurement</button></div></form></div></div>
+
+<div class="modal" id="articleModal"><div class="modal-card"><div class="modal-head"><h3>Add scientific article</h3><button class="close" data-close="articleModal">×</button></div><form id="articleForm"><div class="form-grid"><div class="form-group full"><label>TITLE</label><input class="input" name="title" required placeholder="Article title"></div><div class="form-group"><label>SOURCE</label><input class="input" name="source" placeholder="Journal / website"></div><div class="form-group"><label>AUTHORS</label><input class="input" name="authors" placeholder="Authors"></div><div class="form-group full"><label>URL (optional)</label><input class="input" name="url" placeholder="https://..."></div><div class="form-group full"><label>ARTICLE TEXT / ABSTRACT</label><textarea class="input" name="content" rows="9" required placeholder="Paste the abstract or article text here…"></textarea></div></div><div class="notice" style="margin-top:12px">This browser-only build analyzes the text you provide. It does not claim to independently verify scientific findings. A real AI provider can be connected later without exposing a secret key in the browser.</div><div class="form-actions"><button type="button" class="btn" data-close="articleModal">Cancel</button><button class="btn primary" type="submit">Analyze & save</button></div></form></div></div>
+
+<div class="toast" id="toast"></div>
+<script>
+(() => {
+  'use strict';
+  const storageKey = 'pladata-v3';
+  const metricMeta = {
+    soilMoisture:{label:'Soil moisture',unit:'%',fallback:58}, soilTemp:{label:'Soil temperature',unit:'°C',fallback:29}, temperature:{label:'Air temperature',unit:'°C',fallback:31},
+    humidity:{label:'Humidity',unit:'%',fallback:50}, pH:{label:'Soil pH',unit:'pH',fallback:6.8}, nitrogen:{label:'Nitrogen',unit:'mg/kg',fallback:null},
+    phosphorus:{label:'Phosphorus',unit:'mg/kg',fallback:null}, potassium:{label:'Potassium',unit:'mg/kg',fallback:null}, plantGrowth:{label:'Plant growth',unit:'cm/week',fallback:null}, rainfall:{label:'Rainfall',unit:'mm',fallback:null}, sunlight:{label:'Sunlight',unit:'hours',fallback:null}
+  };
+  const globalProfiles = [
+    {id:'amazon',name:'Amazon Rainforest',region:'South America',climate:'Tropical rainforest',temp:'24–31°C',rainfall:'1,500–3,000 mm/yr',moisture:'High',biodiversity:'Very high',flora:'Canopy trees, palms, lianas',fauna:'Jaguar, sloths, macaws, frogs'},
+    {id:'congo',name:'Congo Basin',region:'Central Africa',climate:'Humid tropical',temp:'23–30°C',rainfall:'1,200–2,000 mm/yr',moisture:'High',biodiversity:'Very high',flora:'Evergreen trees, palms, shrubs',fauna:'Forest elephant, gorilla, okapi'},
+    {id:'boreal',name:'Boreal Forest',region:'Northern Eurasia & North America',climate:'Cold continental',temp:'−20–20°C',rainfall:'300–850 mm/yr',moisture:'Variable',biodiversity:'Moderate',flora:'Spruce, pine, fir, mosses',fauna:'Moose, wolves, lynx, owls'},
+    {id:'daintree',name:'Daintree Rainforest',region:'Queensland, Australia',climate:'Tropical',temp:'20–31°C',rainfall:'1,500–3,000 mm/yr',moisture:'High',biodiversity:'High',flora:'Palms, ferns, dense canopy',fauna:'Cassowary, tree kangaroo, birds'},
+    {id:'sundarbans',name:'Sundarbans',region:'Bangladesh & India',climate:'Tropical monsoon',temp:'18–34°C',rainfall:'1,600–2,800 mm/yr',moisture:'Very high',biodiversity:'High',flora:'Mangroves, salt-tolerant plants',fauna:'Tiger, crocodile, deer, fish'},
+    {id:'mangrove',name:'Mangrove Ecosystem',region:'Tropical & subtropical coasts',climate:'Warm coastal',temp:'20–32°C',rainfall:'Variable',moisture:'Very high',biodiversity:'High',flora:'Mangrove shrubs and trees',fauna:'Crabs, fish, wading birds'}
+  ];
+  let trendChart = null, detailChart = null, activeView = 'dashboard';
+  const state = loadState();
+  let currentWeather = {};
+  let scannerStream = null;
+  let scanImageData = '';
+  let scanResultData = null;
+
+  function uid(){ return (window.crypto && window.crypto.randomUUID) ? window.crypto.randomUUID() : Math.random().toString(36).slice(2); }
+  function seed(){
+    const id = uid(); const measurements=[]; const now=Date.now();
+    for(let d=13;d>=0;d--){ const date=new Date(now-d*86400000).toISOString(); measurements.push(
+      {id:uid(),ecosystemId:id,variable:'soilMoisture',value:55+(13-d)*0.9+(d%3)*1.4,unit:'%',timestamp:date,source:'Demo Data',notes:'Seeded demo observation'},
+      {id:uid(),ecosystemId:id,variable:'soilTemp',value:28+(13-d)*0.08+(d%2)*0.4,unit:'°C',timestamp:date,source:'Demo Data',notes:'Seeded demo observation'},
+      {id:uid(),ecosystemId:id,variable:'plantGrowth',value:2.2+(13-d)*0.08+(d%4)*0.1,unit:'cm/week',timestamp:date,source:'Demo Data',notes:'Seeded demo observation'},
+      {id:uid(),ecosystemId:id,variable:'pH',value:6.55+(d%5)*0.06,unit:'pH',timestamp:date,source:'Demo Data',notes:'Seeded demo observation'}
+    ); }
+    return {activeEcosystemId:id,ecosystems:[{id,name:'My Dubai Garden',location:'Dubai, UAE',type:'Garden',icon:'🌱',lat:25.2048,lon:55.2708,notes:'Track soil, temperature, moisture and plant growth.',createdAt:new Date().toISOString()}],measurements,articles:[{id:uid(),title:'Forest biodiversity and ecosystem resilience',source:'PlaData demo research record',authors:'PlaData',url:'',content:'Biodiversity and environmental conditions can be considered together when studying ecosystem resilience. Site-level measurements provide local context for ecological interpretation.',tags:['Biodiversity','Forestry'],summary:'A demonstration research note on considering biodiversity alongside environmental conditions.',findings:['Biodiversity should be interpreted in ecological context.','Local measurements can complement broader ecological research.'],limitations:'Demo article text.'}],observations:[]};
+  }
+  function loadState(){ try{ const raw=localStorage.getItem(storageKey); if(!raw){const s=seed();localStorage.setItem(storageKey,JSON.stringify(s));return s;} const s=JSON.parse(raw); if(!Array.isArray(s.ecosystems)||!Array.isArray(s.measurements)||!Array.isArray(s.articles)) throw new Error('bad state'); if(!Array.isArray(s.observations)) s.observations=[]; return s;}catch(e){return seed();} }
+  function save(){ localStorage.setItem(storageKey,JSON.stringify(state)); }
+  function q(id){return document.getElementById(id)}
+  function toast(msg){const el=q('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),2200)}
+  function fmtDate(v){return new Date(v).toLocaleDateString([],{day:'2-digit',month:'short'})}
+  function currentEco(){ return state.ecosystems.find(e=>e.id===state.activeEcosystemId) || state.ecosystems[0] || null; }
+  function ecoMeasurements(ecoId){ return state.measurements.filter(m=>m.ecosystemId===ecoId); }
+  function latest(ecoId,variable){ return [...ecoMeasurements(ecoId)].filter(m=>m.variable===variable).sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp))[0] || null; }
+  function avg(ecoId,variable){const vals=ecoMeasurements(ecoId).filter(m=>m.variable===variable).map(m=>Number(m.value)).filter(Number.isFinite);return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null}
+  function series(ecoId,variable){ return [...ecoMeasurements(ecoId)].filter(m=>m.variable===variable).sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp)); }
+  function setDateDefault(){ const input=document.querySelector('#dataForm input[name="timestamp"]'); if(!input.value){const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());input.value=d.toISOString().slice(0,16)} }
+
+  function nav(view){ if(view!=='scan' && scannerStream) stopScanner(); activeView=view; document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view)); document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); const viewEl=q('view-'+view); if(viewEl)viewEl.classList.add('active'); const names={dashboard:'Home / Overview',scan:'Scan',ecosystems:'My Ecosystems',explore:'Explore',research:'Research',insights:'Insights', 'ecosystem-detail':'Ecosystem'};q('crumb').textContent=names[view]||'PlaData'; render();window.scrollTo({top:0,behavior:'smooth'}) }
+  function openModal(id){q(id).classList.add('open')}
+  function closeModal(id){q(id).classList.remove('open')}
+  function fillEcosystemForm(eco){const f=q('ecosystemForm'); f.reset(); f.elements.id.value=eco?.id||''; f.elements.name.value=eco?.name||''; f.elements.location.value=eco?.location||''; f.elements.type.value=eco?.type||'Garden'; f.elements.lat.value=eco?.lat??''; f.elements.lon.value=eco?.lon??''; f.elements.icon.value=eco?.icon||'🌱'; f.elements.notes.value=eco?.notes||''; q('ecoModalTitle').textContent=eco?'Edit ecosystem':'Add ecosystem';}
+
+  function renderHome(){
+    const eco=currentEco(); q('noEcoHome').style.display=eco?'none':'block'; q('homeBody').style.display=eco?'block':'none'; if(!eco)return;
+    q('homeTitle').textContent=eco.name+' at a glance.'; q('homeSubtitle').textContent=[eco.location,eco.type].filter(Boolean).join(' • ')+(eco.notes?' — '+eco.notes:'');
+    const defs=[['Temperature','temperature','°C',currentWeather.temperature],['Humidity','humidity','%',currentWeather.humidity],['Soil moisture','soilMoisture','%',currentWeather.soilMoisture],['Soil temperature','soilTemp','°C',currentWeather.soilTemp],['Soil pH','pH','',null]];
+    q('dashboardStats').innerHTML=defs.map(([label,varName,unit,live])=>{const m=latest(eco.id,varName);const val=live!=null?live:(m?m.value:null);const u=live!=null?unit:(m?.unit||metricMeta[varName].unit);return `<div class="card stat"><div class="label">${label}</div><div class="value">${val==null?'—':Number(val).toFixed(label==='Soil pH'?2:1)} ${u}</div><div class="meta">${live!=null?'Live weather':'Latest saved value'}</div></div>`}).join('');
+    renderHomeChart(); renderFieldNotes(); renderLatest(); renderCurrentEcoCard(); q('weatherChip').textContent=currentWeather.source?('Weather: '+currentWeather.source):'Weather: not loaded';
+  }
+  function renderHomeChart(){const eco=currentEco(); if(!eco)return; const variable=q('dashboardMetric').value; const s=series(eco.id,variable); if(trendChart)trendChart.destroy(); trendChart=new Chart(q('trendChart'),{type:'line',data:{labels:s.map(x=>fmtDate(x.timestamp)),datasets:[{label:metricMeta[variable].label,data:s.map(x=>Number(x.value)),tension:.35,borderWidth:2,pointRadius:2,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{beginAtZero:false}}}})}
+  function renderFieldNotes(){const eco=currentEco(); if(!eco)return;const moist=avg(eco.id,'soilMoisture'),growth=avg(eco.id,'plantGrowth'),ph=avg(eco.id,'pH'); const notes=[];if(moist!=null)notes.push(`Average saved soil moisture is ${moist.toFixed(0)}%. Keep measuring it with plant growth so changes can be interpreted together.`);if(growth!=null)notes.push(`Average recorded growth is ${growth.toFixed(1)} cm/week. Add sunlight or watering notes to build more context.`);if(ph!=null)notes.push(`You have ${ecoMeasurements(eco.id).filter(m=>m.variable==='pH').length} pH observations. Consistent timing makes trend checks more useful.`);if(!notes.length)notes.push('Add soil moisture, soil temperature, pH or plant growth to start building a useful baseline.');q('fieldNotes').innerHTML=notes.map(x=>`<div class="callout" style="margin-bottom:8px">${x}</div>`).join('')}
+  function renderLatest(){const eco=currentEco();if(!eco)return;const rows=[...ecoMeasurements(eco.id)].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp)).slice(0,8);q('latestTable').innerHTML=rows.length?`<div class="table-wrap"><table><thead><tr><th>Variable</th><th>Value</th><th>Date</th><th>Source</th></tr></thead><tbody>${rows.map(m=>`<tr><td>${metricMeta[m.variable]?.label||m.variable}</td><td><strong>${Number(m.value).toFixed(2)} ${m.unit}</strong></td><td>${fmtDate(m.timestamp)}</td><td><span class="pill">${m.source}</span></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">No measurements yet.</div>'}
+  function renderCurrentEcoCard(){const eco=currentEco();q('currentEcoCard').innerHTML=eco?`<div class="ecosystem-card selected"><div class="eco-top"><div><strong>${eco.icon} ${eco.name}</strong><div class="tiny muted">${eco.location||'Location not set'} • ${eco.type}</div></div><span class="pill">Active</span></div><div class="eco-actions"><button class="btn small" data-open-detail="${eco.id}">Open</button><button class="btn small" id="editCurrentHome">Edit</button><button class="btn small danger" id="deleteCurrentHome">Delete</button></div></div>`:''; q('editCurrentHome')?.addEventListener('click',()=>{fillEcosystemForm(eco);openModal('ecosystemModal')});q('deleteCurrentHome')?.addEventListener('click',deleteActiveEco)}
+
+  function renderMyEcosystems(){const f=q('ecoSearch').value.trim().toLowerCase();const arr=state.ecosystems.filter(e=>!f||`${e.name} ${e.location} ${e.type} ${e.notes}`.toLowerCase().includes(f));q('myEcoGrid').innerHTML=arr.length?arr.map(e=>`<div class="ecosystem-card ${e.id===state.activeEcosystemId?'selected':''}"><div class="eco-top"><div><h3>${e.icon||'🌱'} ${e.name}</h3><div class="tiny muted">${e.location||'No location'} • ${e.type}</div></div>${e.id===state.activeEcosystemId?'<span class="pill">Active</span>':''}</div><p class="tiny muted" style="margin:10px 0 0">${e.notes||'No notes yet.'}</p><div class="eco-actions"><button class="btn small" data-select-eco="${e.id}">Use this</button><button class="btn small" data-open-detail="${e.id}">Open</button><button class="btn small" data-edit-eco="${e.id}">Edit</button><button class="btn small danger" data-delete-eco="${e.id}">Delete</button></div></div>`).join(''):'<div class="empty">No ecosystems match your search.</div>'}
+
+  function renderGlobalExplore(){const f=q('globalSearch').value.trim().toLowerCase();const arr=globalProfiles.filter(e=>!f||`${e.name} ${e.region} ${e.climate} ${e.flora} ${e.fauna}`.toLowerCase().includes(f));q('globalEcoGrid').innerHTML=arr.map(e=>`<div class="card eco-card"><div class="eco-top"><div><h3>${e.name}</h3><div class="tiny muted">${e.region}</div></div><span class="pill">Reference</span></div><p class="tiny muted">${e.climate}</p><div class="eco-meta"><div class="eco-stat"><small>Temperature</small><strong>${e.temp}</strong></div><div class="eco-stat"><small>Rainfall</small><strong>${e.rainfall}</strong></div><div class="eco-stat"><small>Moisture</small><strong>${e.moisture}</strong></div><div class="eco-stat"><small>Biodiversity</small><strong>${e.biodiversity}</strong></div></div><div class="tag-row" style="margin-top:10px"><span class="pill">Flora: ${e.flora}</span><span class="pill">Fauna: ${e.fauna}</span></div></div>`).join('')||'<div class="empty">No profiles match your search.</div>'}
+
+  function renderResearch(){q('articleList').innerHTML=state.articles.length?state.articles.map(a=>`<div class="ecosystem-card" style="margin-bottom:9px"><div class="eco-top"><div><strong>${a.title}</strong><div class="tiny muted">${a.source||'Unknown source'} • ${a.authors||'Unknown authors'}</div></div><span class="pill">Saved</span></div><div class="tag-row" style="margin-top:8px">${(a.tags||[]).map(t=>`<span class="pill">${t}</span>`).join('')}</div><p class="tiny" style="margin:10px 0 0">${a.summary}</p><div class="callout" style="margin-top:8px"><strong>Key findings</strong><br>${(a.findings||[]).slice(0,2).join(' • ')}</div></div>`).join(''):'<div class="empty">No research saved yet.</div>'; const themes=[];const text=state.articles.map(a=>`${a.title} ${(a.tags||[]).join(' ')} ${a.summary}`).join(' ').toLowerCase();if(text.includes('soil'))themes.push('Soil research matches your soil measurements.');if(text.includes('water')||text.includes('moisture'))themes.push('Water/moisture research can be compared with your moisture history.');if(text.includes('biodiversity'))themes.push('Biodiversity research can be connected to species observations you add later.');if(text.includes('climate'))themes.push('Climate research can be used alongside live weather context.');q('researchHelp').innerHTML=themes.map(t=>`<div class="callout" style="margin-bottom:8px">${t}</div>`).join('')||'<div class="empty">Add an article to see research connections.</div>'}
+  function analyzeText(text){const t=text.toLowerCase();const tags=[];[['soil','Soil'],['water','Water'],['moisture','Water'],['forest','Forestry'],['biodiversity','Biodiversity'],['plant','Plants'],['climate','Climate'],['rain','Rainfall'],['temperature','Temperature']].forEach(([n,l])=>{if(t.includes(n)&&!tags.includes(l))tags.push(l)});const sentences=text.replace(/\s+/g,' ').split(/(?<=[.!?])\s+/).filter(Boolean);return{tags:tags.length?tags:['Ecology'],summary:sentences.slice(0,3).join(' ')||'No summary extracted.',findings:sentences.slice(0,4),limitations:'Browser demo analyzer. Verify claims in the original article.'}}
+
+  function renderInsights(){const eco=currentEco();if(!eco){q('recommendations').innerHTML='<div class="empty">Create an ecosystem first.</div>';return}const rec=[];const m=avg(eco.id,'soilMoisture'),p=avg(eco.id,'pH'),g=avg(eco.id,'plantGrowth'),count=ecoMeasurements(eco.id).length;if(m!=null)rec.push(['Monitor moisture with growth','Keep recording moisture and plant growth at similar times so PlaData can describe their relationship without assuming causation.']);if(p!=null)rec.push(['Keep a pH history','You have saved pH measurements. More consistent readings make changes easier to interpret.']);if(g!=null)rec.push(['Add more context','Pair growth with temperature, sunlight and watering notes to improve the dataset.']);if(!rec.length)rec.push(['Start with a baseline','Add soil moisture, soil temperature, pH and plant growth to create a useful starting dataset.']);q('recommendations').innerHTML=rec.map(r=>`<div class="callout" style="margin-bottom:8px"><strong>${r[0]}</strong><br>${r[1]}</div>`).join('');const completeness=Math.min(100,Math.round((new Set(ecoMeasurements(eco.id).map(x=>x.variable)).size/6)*100));q('confidencePanel').innerHTML=`<div class="callout"><strong>${count} total records</strong><br>${new Set(ecoMeasurements(eco.id).map(x=>x.variable)).size} different variables tracked.</div><div style="margin-top:10px;border:1px solid var(--line);height:10px;border-radius:999px;overflow:hidden;background:#eef2ee"><div style="height:100%;width:${completeness}%;background:var(--green2)"></div></div><div class="tiny muted" style="margin-top:6px">Coverage is a simple completeness indicator, not a scientific confidence score.</div>`;renderResearchConnections()}
+  function renderResearchConnections(){const text=state.articles.map(a=>`${a.title} ${(a.tags||[]).join(' ')} ${a.summary}`).join(' ').toLowerCase();const cards=[];if(text.includes('soil')||text.includes('moisture'))cards.push('Saved research contains soil/water themes that match your dataset.');if(text.includes('biodiversity'))cards.push('Saved research contains biodiversity themes. Add species observations to connect them more directly.');if(text.includes('climate')||text.includes('temperature'))cards.push('Climate/temperature themes can be viewed beside your weather observations.');q('researchConnections').innerHTML=cards.map(x=>`<div class="callout" style="margin-bottom:8px">${x}</div>`).join('')||'<div class="empty">No matching research themes yet.</div>'}
+
+  function openDetail(id){state.activeEcosystemId=id;save();nav('ecosystem-detail')}
+  function renderDetail(){const eco=currentEco();if(!eco){nav('ecosystems');return}q('detailName').textContent=eco.icon+' '+eco.name;q('detailMeta').textContent=[eco.location||'Location not set',eco.type].join(' • ');q('detailNotes').textContent=eco.notes||'No notes yet.';q('detailType').textContent=eco.type;q('detailLat').value=eco.lat??'';q('detailLon').value=eco.lon??'';const vars=['soilMoisture','soilTemp','temperature','humidity','pH','plantGrowth'];q('detailMetrics').innerHTML=vars.map(v=>{const m=latest(eco.id,v);return `<div class="metric-box"><small>${metricMeta[v].label}</small><strong>${m?Number(m.value).toFixed(v==='pH'?2:1):'—'} ${m?.unit||metricMeta[v].unit}</strong><span class="tiny muted">${m?'Latest':'No data'}</span></div>`}).join('');const rows=[...ecoMeasurements(eco.id)].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp)).slice(0,20);q('detailTable').innerHTML=rows.length?`<div class="table-wrap"><table><thead><tr><th>Variable</th><th>Value</th><th>Date</th><th>Source</th><th>Notes</th></tr></thead><tbody>${rows.map(m=>`<tr><td>${metricMeta[m.variable]?.label||m.variable}</td><td>${Number(m.value).toFixed(2)} ${m.unit}</td><td>${new Date(m.timestamp).toLocaleString()}</td><td><span class="pill">${m.source}</span></td><td>${m.notes||'—'}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">No measurements yet.</div>';renderDetailChart();fetchWeatherForEco(eco,false)}
+  function renderDetailChart(){const eco=currentEco();if(!eco)return;const v=q('detailMetric').value,s=series(eco.id,v);if(detailChart)detailChart.destroy();detailChart=new Chart(q('detailChart'),{type:'line',data:{labels:s.map(x=>fmtDate(x.timestamp)),datasets:[{label:metricMeta[v].label,data:s.map(x=>Number(x.value)),tension:.35,borderWidth:2,pointRadius:2,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{beginAtZero:false}}}})}
+  async function fetchWeatherForEco(eco,notify=true){if(!eco)return;const lat=Number(eco.lat),lon=Number(eco.lon);if(!Number.isFinite(lat)||!Number.isFinite(lon)){q('detailWeatherStatus').textContent='No location';q('detailWeatherCards').innerHTML='<div class="empty">Add latitude and longitude when customizing this ecosystem.</div>';return}q('detailWeatherStatus').textContent='Loading…';try{const u=`https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&current=temperature_2m,relative_humidity_2m,soil_temperature_0_to_7cm,soil_moisture_0_to_7cm&timezone=auto`;const r=await fetch(u);if(!r.ok)throw new Error('weather');const j=await r.json();currentWeather={temperature:j.current?.temperature_2m,humidity:j.current?.relative_humidity_2m,soilTemp:j.current?.soil_temperature_0_to_7cm,soilMoisture:j.current?.soil_moisture_0_to_7cm!=null?j.current.soil_moisture_0_to_7cm*100:null,source:'Open‑Meteo'};q('detailWeatherStatus').textContent='Live';q('detailWeatherCards').innerHTML=`<div class="metric-grid"><div class="metric-box"><small>Air</small><strong>${fmtNum(currentWeather.temperature)} °C</strong></div><div class="metric-box"><small>Humidity</small><strong>${fmtNum(currentWeather.humidity)} %</strong></div><div class="metric-box"><small>Soil temp</small><strong>${fmtNum(currentWeather.soilTemp)} °C</strong></div><div class="metric-box"><small>Soil moisture</small><strong>${fmtNum(currentWeather.soilMoisture)} %</strong></div></div>`;if(notify)toast('Weather updated');renderHome();}catch(e){currentWeather={};q('detailWeatherStatus').textContent='Unavailable';q('detailWeatherCards').innerHTML='<div class="empty">Live weather could not be loaded. Your saved data is unchanged.</div>';if(notify)toast('Live weather unavailable');renderHome()}}
+  function fmtNum(v){return v==null?'—':Number(v).toFixed(1)}
+  async function captureWeather(){const eco=currentEco();if(!eco)return;await fetchWeatherForEco(eco,false);const ts=new Date().toISOString();if(Number.isFinite(currentWeather.temperature))state.measurements.push({id:uid(),ecosystemId:eco.id,variable:'temperature',value:currentWeather.temperature,unit:'°C',timestamp:ts,source:'Live API',notes:'Current temperature from Open‑Meteo'});if(Number.isFinite(currentWeather.humidity))state.measurements.push({id:uid(),ecosystemId:eco.id,variable:'humidity',value:currentWeather.humidity,unit:'%',timestamp:ts,source:'Live API',notes:'Current relative humidity from Open‑Meteo'});if(Number.isFinite(currentWeather.soilTemp))state.measurements.push({id:uid(),ecosystemId:eco.id,variable:'soilTemp',value:currentWeather.soilTemp,unit:'°C',timestamp:ts,source:'Live API',notes:'Modelled soil temperature, 0–7 cm'});if(Number.isFinite(currentWeather.soilMoisture))state.measurements.push({id:uid(),ecosystemId:eco.id,variable:'soilMoisture',value:currentWeather.soilMoisture,unit:'%',timestamp:ts,source:'Live API',notes:'Modelled soil moisture, 0–7 cm'});save();toast('Current conditions saved');render()}
+  function renderScanner(){
+    const eco=currentEco();
+    const list=q('observationList');
+    if(!list)return;
+    if(!eco){list.innerHTML='<div class="empty">Create an ecosystem first, then observations can be attached to it.</div>';return}
+    const obs=(state.observations||[]).filter(o=>o.ecosystemId===eco.id).sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));
+    list.innerHTML=obs.length?obs.map(o=>`<div class="mini"><div><strong>${o.commonName||o.scientificName||'Unknown organism'}</strong><div class="tiny muted">${o.scientificName||'Scientific name unavailable'} • ${o.type||'Organism'}</div></div><span class="pill">${Math.round((o.confidence||0)*100)}%</span></div>`).join(''):'<div class="empty">No observations yet.</div>';
+  }
+  function stopScanner(){if(scannerStream){scannerStream.getTracks().forEach(t=>t.stop());scannerStream=null;} const v=q('cameraVideo'); if(v){v.style.display='none';v.srcObject=null;} q('cameraPlaceholder').style.display='block';q('cameraStatus').textContent='Off';q('captureScanBtn').disabled=true;}
+  async function startScanner(){
+    try{
+      if(!navigator.mediaDevices?.getUserMedia)throw new Error('Camera API unavailable');
+      stopScanner();
+      scannerStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:960}},audio:false});
+      const v=q('cameraVideo');v.srcObject=scannerStream;v.style.display='block';q('cameraPlaceholder').style.display='none';q('cameraStatus').textContent='On';q('captureScanBtn').disabled=false;toast('Camera ready');
+    }catch(e){q('cameraStatus').textContent='Unavailable';toast('Camera permission was not granted');}
+  }
+  function loadScanFile(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{scanImageData=String(reader.result);q('scanPreview').src=scanImageData;q('scanPreviewWrap').style.display='block';stopScanner();identifyScan()};reader.readAsDataURL(file)}
+  function captureScan(){const v=q('cameraVideo'),c=q('cameraCanvas');if(!scannerStream||!v.videoWidth)return; c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);scanImageData=c.toDataURL('image/jpeg',0.9);q('scanPreview').src=scanImageData;q('scanPreviewWrap').style.display='block';identifyScan()}
+  async function identifyScan(){
+    const result=q('scanResult');const actions=q('scanActions');const mode=q('scanMode').value;const key=q('plantNetKey').value.trim();
+    if(!scanImageData){result.innerHTML='<div class="empty">No image selected.</div>';return}
+    actions.style.display='none';q('scanEngineStatus').textContent='Identifying…';result.innerHTML='<div class="callout"><strong>Analyzing image…</strong><br>This can take a few seconds.</div>';
+    try{
+      if((mode==='plant'||mode==='auto')&&key){
+        const r=await identifyPlantWithPlantNet(key,q('plantNetProject').value);if(r){scanResultData=r;await enrichScanResult(r);renderScanResult(r,'Pl@ntNet');return;}
+      }
+      if(mode!=='plant' && mode!=='auto') throw new Error('The current direct identification connection supports plants. Choose Plant / flora, or add a separate fauna service later.');
+      throw new Error('No plant identification service is configured. Add your Pl@ntNet API key above.');
+    }catch(err){console.error(err);q('scanEngineStatus').textContent='Needs setup';result.innerHTML=`<div class="callout"><strong>Scanner request failed.</strong><br>${escapeHtml(err.message||'Could not identify the image.')}<br><br>If this is HTTP 400, PlaData now shows Pl@ntNet's actual error so the request can be diagnosed. A 403 is the key/domain authorization error.</div>`}
+  }
+  async function identifyPlantWithPlantNet(key,project){
+    // Normalize every camera/upload image to a real JPEG before sending it.
+    // This avoids HEIC/WebP/other browser formats causing a 400 response.
+    const sourceBlob=await (await fetch(scanImageData)).blob();
+    const jpegBlob=await new Promise((resolve,reject)=>{
+      const img=new Image();
+      img.onload=()=>{
+        try{
+          const maxSide=1280;
+          const scale=Math.min(1,maxSide/Math.max(img.naturalWidth,img.naturalHeight));
+          const c=document.createElement('canvas');
+          c.width=Math.max(1,Math.round(img.naturalWidth*scale));
+          c.height=Math.max(1,Math.round(img.naturalHeight*scale));
+          c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+          c.toBlob(b=>b?resolve(b):reject(new Error('Could not convert the image to JPEG.')),'image/jpeg',0.9);
+        }catch(e){reject(e)}
+      };
+      img.onerror=()=>reject(new Error('The selected image could not be decoded by the browser.'));
+      img.src=URL.createObjectURL(sourceBlob);
+    });
+
+    const form=new FormData();
+    form.append('images',jpegBlob,'scan.jpg');
+    // Omitting organs is intentional: Pl@ntNet automatically detects the organ.
+    const url=`https://my-api.plantnet.org/v2/identify/${encodeURIComponent(project||'all')}?api-key=${encodeURIComponent(key)}&lang=en&nb-results=5&detailed=true`;
+    const r=await fetch(url,{method:'POST',body:form});
+    if(!r.ok){
+      let detail='';
+      try{detail=(await r.text()).slice(0,600)}catch(e){}
+      throw new Error(`Pl@ntNet returned HTTP ${r.status}${detail?': '+detail:''}`);
+    }
+    const j=await r.json();
+    const top=j.results?.[0];
+    if(!top)throw new Error('Pl@ntNet could not find a probable plant species. Try a clearer photo.');
+    const sp=top.species||{};
+    return {
+      type:'Flora / plant',
+      commonName:(sp.commonNames||[])[0]||sp.scientificNameWithoutAuthor||'Unknown plant',
+      scientificName:sp.scientificNameWithoutAuthor||'Unknown',
+      family:sp.family?.scientificNameWithoutAuthor||sp.family?.scientificName||'',
+      confidence:Number(top.score)||0,
+      description:'Plant identification returned by the Pl@ntNet visual identification engine.',
+      properties:['Use the identification as a probable match, not absolute proof.','A clearer leaf, flower, fruit or bark photo can improve identification.'],
+      ecosystem:'See the verified taxonomy and distribution information below.',
+      nativeRange:'Not independently determined in this scan.',
+      clues:'Pl@ntNet visual match'
+    };
+  }
+  async function identifyWithPlaDataServer(){throw new Error('Server identification is disabled in the static PlaData build.');}
+
+  async function enrichScanResult(r){
+    if(!r?.scientificName||r.scientificName==='Unknown')return;
+    try{const res=await fetch(`https://api.gbif.org/v1/species/match?name=${encodeURIComponent(r.scientificName)}`);if(!res.ok)return;const g=await res.json();if(g.matchType&&g.usageKey){r.gbif={key:g.usageKey,scientificName:g.scientificName||r.scientificName,rank:g.rank||'',status:g.status||''};if(g.species)r.scientificName=g.scientificName;}}
+    catch(e){console.warn('GBIF enrichment failed',e)}
+  }
+  function renderScanResult(r,engine){
+    q('scanEngineStatus').textContent=engine;const confidence=Math.max(0,Math.min(1,Number(r.confidence)||0));
+    const properties=Array.isArray(r.properties)?r.properties:[];
+    q('scanResult').innerHTML=`<div class="ecosystem-card selected"><div class="eco-top"><div><h3 style="margin:0">${escapeHtml(r.commonName||'Unknown organism')}</h3><div class="tiny muted">${escapeHtml(r.scientificName||'Scientific name unavailable')}</div></div><span class="pill">${Math.round(confidence*100)}% confidence</span></div><div class="metric-grid" style="margin-top:12px"><div class="metric-box"><small>Type</small><strong>${escapeHtml(r.type||'Organism')}</strong></div><div class="metric-box"><small>Family</small><strong>${escapeHtml(r.family||'—')}</strong></div><div class="metric-box"><small>Ecosystem</small><strong>${escapeHtml(r.ecosystem||'—')}</strong></div><div class="metric-box"><small>Taxonomy</small><strong>${r.gbif?'GBIF verified':'Pending'}</strong></div></div><p class="tiny" style="line-height:1.5;margin-top:12px">${escapeHtml(r.description||'')}</p><div class="callout" style="margin-top:10px"><strong>Properties</strong><br>${properties.length?properties.map(escapeHtml).join(' • '):'No properties returned.'}</div><div class="callout" style="margin-top:10px"><strong>Identification note</strong><br>${escapeHtml(r.clues||r.caution||'Use this as a probable identification; closely related species may look similar.')}</div>${r.nativeRange?`<div class="tiny muted" style="margin-top:10px"><strong>Range:</strong> ${escapeHtml(r.nativeRange)}</div>`:''}`;
+    q('scanActions').style.display='flex';
+  }
+  function saveScanObservation(){
+    if(!scanResultData||!currentEco())return;state.observations=state.observations||[];state.observations.push({...scanResultData,id:uid(),ecosystemId:currentEco().id,timestamp:new Date().toISOString(),image:scanImageData});save();toast('Observation added to ecosystem');renderScanner();
+  }
+  function resetScan(){scanResultData=null;scanImageData='';q('scanPreviewWrap').style.display='none';q('scanPreview').removeAttribute('src');q('scanResult').innerHTML='<div class="empty">Take or upload a photo to begin.</div>';q('scanActions').style.display='none';q('scanEngineStatus').textContent='Waiting'}
+  function escapeHtml(v){return String(v??'').replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]))}
+
+  function deleteActiveEco(){const eco=currentEco();if(!eco)return;if(state.ecosystems.length<=1){if(!confirm('Delete the last ecosystem? PlaData will have no ecosystem to show.'))return}else{if(!confirm(`Delete “${eco.name}” and all of its measurements? This cannot be undone.`))return}state.ecosystems=state.ecosystems.filter(e=>e.id!==eco.id);state.measurements=state.measurements.filter(m=>m.ecosystemId!==eco.id);state.activeEcosystemId=state.ecosystems[0]?.id||null;save();toast('Ecosystem deleted');nav(state.ecosystems.length?'ecosystems':'ecosystems')}
+
+  function render(){if(activeView==='dashboard')renderHome();if(activeView==='scan')renderScanner();if(activeView==='ecosystems')renderMyEcosystems();if(activeView==='explore')renderGlobalExplore();if(activeView==='research')renderResearch();if(activeView==='insights')renderInsights();if(activeView==='ecosystem-detail')renderDetail()}
+
+  // Navigation
+  document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>nav(b.dataset.view)));
+  q('startCameraBtn').addEventListener('click',startScanner);
+  q('captureScanBtn').addEventListener('click',captureScan);
+  q('scanFileInput').addEventListener('change',e=>loadScanFile(e.target.files?.[0]));
+  q('scanMode').addEventListener('change',()=>{if(scanImageData)identifyScan()});
+  q('plantNetProject').addEventListener('change',()=>{if(scanImageData&&q('plantNetKey').value.trim()&&q('scanMode').value!=='animal')identifyScan()});
+  q('scanAddObservationBtn').addEventListener('click',saveScanObservation);
+  q('scanRescanBtn').addEventListener('click',resetScan);
+  q('goCurrentEcoFromScan').addEventListener('click',()=>{if(currentEco())openDetail(currentEco().id);else nav('ecosystems')});
+  q('quickAdd').addEventListener('click',()=>{if(!currentEco()){openModal('ecosystemModal');return}openModal('dataModal');setDateDefault()});
+  q('openAddData').addEventListener('click',()=>{openModal('dataModal');setDateDefault()});
+  q('addFromMy')?.addEventListener('click',()=>{openModal('dataModal');setDateDefault()});
+  q('addEcosystemBtn').addEventListener('click',()=>{fillEcosystemForm(null);openModal('ecosystemModal')});
+  q('ecoSearch').addEventListener('input',renderMyEcosystems);q('globalSearch').addEventListener('input',renderGlobalExplore);
+  q('dashboardMetric').addEventListener('change',renderHomeChart);q('detailMetric').addEventListener('change',renderDetailChart);
+  q('backToEcosystems').addEventListener('click',()=>nav('ecosystems'));
+  q('editEcoBtn').addEventListener('click',()=>{fillEcosystemForm(currentEco());openModal('ecosystemModal')});
+  q('deleteEcoBtn').addEventListener('click',deleteActiveEco);
+  q('detailAddData').addEventListener('click',()=>{openModal('dataModal');setDateDefault()});
+  q('refreshWeather').addEventListener('click',async()=>{const eco=currentEco();if(eco)await fetchWeatherForEco(eco,true)});
+  q('captureWeatherBtn').addEventListener('click',captureWeather);
+  q('useLocationBtn').addEventListener('click',()=>{if(!navigator.geolocation){toast('Location is not available in this browser');return}navigator.geolocation.getCurrentPosition(pos=>{q('detailLat').value=pos.coords.latitude.toFixed(4);q('detailLon').value=pos.coords.longitude.toFixed(4);const eco=currentEco();eco.lat=pos.coords.latitude;eco.lon=pos.coords.longitude;save();fetchWeatherForEco(eco,true)},()=>toast('Location permission was not granted'))});
+  q('openArticleBtn').addEventListener('click',()=>openModal('articleModal'));
+  document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
+  document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
+
+  // Ecosystem create/edit
+  q('ecosystemForm').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.currentTarget);const id=String(f.get('id')||'');const existing=state.ecosystems.find(x=>x.id===id);const eco={id:id||uid(),name:String(f.get('name')).trim(),location:String(f.get('location')).trim(),type:String(f.get('type')),lat:f.get('lat')===''?null:Number(f.get('lat')),lon:f.get('lon')===''?null:Number(f.get('lon')),icon:String(f.get('icon')||'🌱'),notes:String(f.get('notes')||'').trim(),createdAt:existing?.createdAt||new Date().toISOString()};if(existing)Object.assign(existing,eco);else{state.ecosystems.push(eco);state.activeEcosystemId=eco.id}save();closeModal('ecosystemModal');toast(existing?'Ecosystem updated':'Ecosystem created');openDetail(eco.id)});
+
+  // Data entry
+  q('dataForm').addEventListener('submit',e=>{e.preventDefault();const eco=currentEco();if(!eco){toast('Create an ecosystem first');return}const f=new FormData(e.currentTarget);const variable=String(f.get('variable'));state.measurements.push({id:uid(),ecosystemId:eco.id,variable,value:Number(f.get('value')),unit:String(f.get('unit')),timestamp:new Date(String(f.get('timestamp'))).toISOString(),source:String(f.get('source')),notes:String(f.get('notes')||'')});save();closeModal('dataModal');e.currentTarget.reset();setDateDefault();toast('Measurement saved');render()});
+
+  // Article analyzer
+  q('articleForm').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.currentTarget);const a=analyzeText(String(f.get('content')));state.articles.unshift({id:uid(),title:String(f.get('title')),source:String(f.get('source')||'User source'),authors:String(f.get('authors')||'Not specified'),url:String(f.get('url')||''),content:String(f.get('content')), ...a});save();closeModal('articleModal');e.currentTarget.reset();toast('Article analyzed and saved');render()});
+
+  // Delegated ecosystem actions
+  q('myEcoGrid').addEventListener('click',e=>{const select=e.target.closest('[data-select-eco]');const open=e.target.closest('[data-open-detail]');const edit=e.target.closest('[data-edit-eco]');const del=e.target.closest('[data-delete-eco]');if(select){state.activeEcosystemId=select.dataset.selectEco;save();toast('Active ecosystem changed');renderMyEcosystems();return}if(open){openDetail(open.dataset.openDetail);return}if(edit){const eco=state.ecosystems.find(x=>x.id===edit.dataset.editEco);if(eco){fillEcosystemForm(eco);openModal('ecosystemModal')}return}if(del){state.activeEcosystemId=del.dataset.deleteEco;save();deleteActiveEco()}});
+  q('currentEcoCard').addEventListener('click',e=>{const b=e.target.closest('[data-open-detail]');if(b)openDetail(b.dataset.openDetail)});
+
+  // Seed date/weather
+  setDateDefault();
+  if(currentEco()) fetchWeatherForEco(currentEco(),false);
+  render();
+})();
+</script>
+</body>
+</html>
